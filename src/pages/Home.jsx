@@ -22,24 +22,6 @@ export default function Home() {
     { id: 'oceania3', city: "Suva", photo: "/img/oceania/suva.jpg" },
     { id: 'oceania4', city: "Wellington", photo: "/img/oceania/wellington.jpg" }
   ]
-// return (
-//   <main className="min-h-[85vh]">
-//     <div className="grow flex justify-center items-center">
-//       <div className="w-[742px] h-[304px] flex flex-col justify-between gap-10 ">
-//           <h1 className="font-sans font-bold text-[48px]">Find the perfect destination</h1>
-//           <p className="font-sans font-semibold	text-[20px]">Our app will help you find the perfect path for your next<br />trip. With an easy-to-use interface and a host of itinerary<br />options, planning your next trip has never been easier.</p>
-//         <button className="w-[250px] h-[60px] bg-[#4f46e5] text-white text-[18px] py-[16px] px-[20px] rounded-[8px] self-start">
-//           <Anchor to='/cities'>View More</Anchor>
-//       </button>
-//       </div>
-//       <Carousel data={data}/>
-//     </div>
-//       <div className="font-semibold italic flex justify-center items-center">
-//         <p>"Find your perfect trip, designed by insiders who know and love their cities!"</p>
-//       </div>
-//   </main>
-// );
-// }
 
 return (
   <main className="min-h-[85vh]">
