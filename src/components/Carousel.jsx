@@ -6,9 +6,9 @@ export default function Carousel({ data }) {
   let [counter, setCounter] = useState(0);
 
   function directionSlide(direction) {
-    const increment = direction === "next" ? 4 : -4; {/*increment determina 4 si es next y -4 si es prev */}
-    const newCounter = (counter + increment + data.length) % data.length; {/* mantiene el valor dento del limite del arreglo */}
-    setCounter(newCounter); {/*Actualiza la nueva posicion */} 
+    const increment = direction === "next" ? 4 : -4; 
+    const newCounter = (counter + increment + data.length) % data.length; 
+    setCounter(newCounter); 
   }
   
   return (
@@ -17,7 +17,8 @@ export default function Carousel({ data }) {
   onClick={() => directionSlide("prev")}
 />
 <div className="w-2/5">
-  <div className="flex flex-wrap justify-center m-5 py-10">
+<div className="flex justify-center font-semibold"><p>Popular MYTINERARIES!</p></div>
+  <div className="flex flex-wrap justify-center m-5 py-2">
     {data.slice(counter, counter + 4).map(each => (
       <CardCity key={each.id} src={each.photo} alt={each.id} text={each.city} />
     ))}

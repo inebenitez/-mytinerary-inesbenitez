@@ -7,3 +7,7 @@ export default function CardCity({ src, alt, text }) {
     </div>
   );
 }
+
+
+
+// md:flex-row lg:flex-row
