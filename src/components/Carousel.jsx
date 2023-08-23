@@ -3,21 +3,25 @@ import Arrow from "../components/Arrow";
 import CardCity from "../components/CardCity";
 
 export default function Carousel({ data }) {
-  let [counter, setCounter] = useState(0);
-  let [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  let cardsPerSlide = screenWidth < 820 ? 1 : 4;
+  const cardsPerSlide = 4;
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      setScreenWidth(window.innerWidth);
-    });
-  });
+    const totalSlides = Math.ceil(data.length / cardsPerSlide);
+    const nextSlide = (currentSlide + 1) % totalSlides;
+
+    const interval = setInterval(() => {
+      setCurrentSlide(nextSlide);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [currentSlide, data.length, cardsPerSlide]);
 
   function directionSlide(direction) {
-    const increment = direction === "next" ? cardsPerSlide : -cardsPerSlide;
-    const newCounter = (counter + increment + data.length) % data.length;
-    setCounter(newCounter);
+    const totalSlides = Math.ceil(data.length / cardsPerSlide);
+    const increment = direction === "next" ? 1 : -1;
+    const newSlide = (currentSlide + increment + totalSlides) % totalSlides;
+    setCurrentSlide(newSlide);
   }
 
   return (
@@ -26,19 +30,22 @@ export default function Carousel({ data }) {
         direction="M15.75 19.5L8.25 12l7.5-7.5"
         onClick={() => directionSlide("prev")}
       />
-      <div className="w-3/5">
-        <div className="flex justify-center font-semibold">
-          <p>Popular MYTINERARIES!</p>
+      <div className="w-4/5 pt-10">
+        <div className="font-sans font-semibold">
+          <p className="text-center">Popular MYTINERARIES!</p>
         </div>
         <div className="flex flex-col md:flex-row flex-wrap justify-center m-5 py-2">
-          {data.slice(counter, counter + cardsPerSlide).map((each) => (
-            <CardCity
-              key={each.id}
-              src={each.photo}
-              alt={each.id}
-              text={each.city}
-            />
-          ))}
+          {data
+            .slice(currentSlide * cardsPerSlide, (currentSlide + 1) * cardsPerSlide)
+            .map((each) => (
+              <CardCity
+                key={each._id}
+                _id={each._id}
+                src={each.photo}
+                alt={each.id}
+                text={each.city}
+              />
+            ))}
         </div>
       </div>
       <Arrow

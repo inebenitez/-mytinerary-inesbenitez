@@ -3,9 +3,8 @@ import { Link as Anchor } from "react-router-dom";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  return (
-    <header className="flex justify-around items-center w-full h-[14vh] py-[25px]">
+    return (
+      <header className="translucent-navbar flex justify-around items-center w-full h-[14vh]">
       <p className="w-[183px] h-[43px] font-sans font-bold text-[32px] text-[#1c1c1c] leading-[43px]">
         My Tinerary
       </p>
