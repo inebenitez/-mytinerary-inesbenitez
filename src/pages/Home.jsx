@@ -1,19 +1,19 @@
 import { useState,useEffect } from "react";
 import Carousel from "../components/Carousel"
+import Footer from "../components/Footer"
 import { Link as Anchor } from "react-router-dom";
-import axios from "axios";
-import apiUrl from '../apiUrl';
+import { useDispatch, useSelector } from "react-redux";
+import city_actions from "../store/actions/cities";
+const { read_carousel } = city_actions;
 
 export default function Home() {
 
-  // const [show,setShow] = useState(true)
   const [data,setData] = useState([])
-  useEffect(
-    ()=> {
-      axios(apiUrl+ 'cities/carousel')
-      // .then((res)=>console.log(res.data.data_carousel))
-        .then((res)=>setData(res.data.data_carousel))
-        .catch(err=>console.log(err))
+  const carousel = useSelector((store) => store.cities.carousel);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(read_carousel());
   }, []);
 
   return (
@@ -33,7 +33,7 @@ export default function Home() {
             <Anchor to="/cities">View More</Anchor>
           </button>
         </div>
-        <Carousel data={data} />
+        <Carousel data={carousel} />
       </div>
       <div className="px-10 m-2 text-center font-sans font-semibold text-sm
           md:text-lg">
@@ -42,6 +42,8 @@ export default function Home() {
           cities!"
         </p>
       </div>
+      <Footer />
     </main>
+  
   );
 }

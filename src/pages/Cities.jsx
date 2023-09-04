@@ -1,16 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import apiUrl from "../apiUrl";
 import CardCarousel from "../components/CardCarousel";
+import Footer from "../components/Footer"
+import { useDispatch, useSelector } from "react-redux";
+import city_actions from "../store/actions/cities";
+const { read_cities } = city_actions;
 
 export default function Cities() {
-  const [cities, setCities] = useState([]);
-  const [reEffect, setReEffect] = useState(true);
+  const cities = useSelector((store) => store.cities.cities);
+  const dispatch = useDispatch();
+  const [refSearch, setSearch] = useState({ city: "" });
+
   const text = useRef();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  function handleFilter() {
-    setReEffect(!reEffect);
+  function handleFilter(e) {
+    const { value } = e.target;
+    setSearch((prevState) => ({
+      ...prevState,
+      city: value.trim(),
+    }));
   }
 
   function removeAccents(str) {
@@ -18,19 +26,8 @@ export default function Cities() {
   }
 
   useEffect(() => {
-    axios
-      .get(apiUrl + "cities")
-      .then((res) => {
-        const searchTerm = removeAccents(
-          text.current.value.trim().toLowerCase()
-        );
-        const filteredCities = res.data.response.filter((city) =>
-          removeAccents(city.city.toLowerCase()).startsWith(searchTerm)
-        );
-        setCities(filteredCities);
-      })
-      .catch((err) => console.log(err));
-  }, [reEffect]);
+    dispatch(read_cities({ filtered: removeAccents(refSearch.city) }));
+  }, [refSearch]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,7 +45,6 @@ export default function Cities() {
     (_, index) =>
       cities.slice(index * cardsPerGroup, (index + 1) * cardsPerGroup)
   );
-
   return (
     <div className="flex flex-col items-center">
       {/* Parte superior con título y foto de fondo */}
@@ -86,18 +82,19 @@ export default function Cities() {
             <div key={groupIndex} className="md:flex justify-center m-5 py-2">
               {group.map((each) => (
                 <CardCarousel
-                    _id={each._id}
-                    src={each.photo}
-                    alt={each.id}
-                    text={each.city}
-                    pais={each.country}
-                    className="md:w-1/4 mx-1"
+                  _id={each._id}
+                  src={each.photo}
+                  alt={each.id}
+                  text={each.city}
+                  pais={each.country}
+                  className="md:w-1/4 mx-1"
                 />
               ))}
             </div>
           ))
         )}
       </div>
+      <Footer/>
     </div>
   );
 }
