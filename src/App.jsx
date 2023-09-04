@@ -1,15 +1,17 @@
-import MainLayout from "./layouts/MainLayout"
 import { RouterProvider } from 'react-router-dom'
 import router from "./router"
+import { Provider } from 'react-redux';
+import store from '../src/store/store'; // Asegúrate de importar tu store aquí
 
 function App() {
 
   return (
-    // <MainLayout>
-    //   <Home/>      
-    // </MainLayout>
-    <RouterProvider router={router} />
+    <>
+        <Provider store={store} >
+            <RouterProvider router = {router} />
+        </Provider>
+    </>
   )
 }
 
-export default App
+export default App;
