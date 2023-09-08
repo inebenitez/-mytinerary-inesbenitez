@@ -3,7 +3,8 @@ import Home from './pages/Home'
 import MainLayout from './layouts/MainLayout' ;
 import Cities from "./pages/Cities" ;
 import CitiesDetails from "./pages/CitiesDetails";
-import Login from './pages/Login' ;
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter( [
     {
@@ -14,9 +15,10 @@ const router = createBrowserRouter( [
             { path: '/index', element: <Home/> },
             { path: '/home', element: <Home/> },
             { path: '/cities', element: <Cities/>},
-            { path: '/login', element: <Login/>},
-            { path: '/city', element: <CitiesDetails/>},
-
+            { path: '/auth/signin', element: <SignIn/>},
+            { path: '/auth/signup', element: <SignUp/>},
+            // { path: '/city', element: <CitiesDetails/>},
+            { path:'/cities/:id', element:<CitiesDetails/>},
         ]
     },  
         ],

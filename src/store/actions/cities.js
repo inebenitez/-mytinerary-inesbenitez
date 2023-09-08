@@ -22,6 +22,7 @@ const read_carousel = createAsyncThunk(
 const read_cities = createAsyncThunk(
     "read_cities", 
     async (_id) => {
+        console.log(_id)
     try {
         let data = await axios(apiUrl + 'cities?city=' +_id.filtered);
         console.log(data);
@@ -40,8 +41,9 @@ const read_cities = createAsyncThunk(
 const read_city = createAsyncThunk(
     "read_city", 
     async (_id) => {
+        console.log(_id, 'esto es id en read city')
     try {
-        let data = await axios(apiUrl + 'cities?_id=' +_id); 
+        let data = await axios(apiUrl + 'cities/' +_id.id); 
         console.log(data);
     return {
         city: data.data.response,
