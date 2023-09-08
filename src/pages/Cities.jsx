@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import CardCarousel from "../components/CardCarousel";
-import Footer from "../components/Footer"
 import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
 const { read_cities } = city_actions;
@@ -45,6 +44,7 @@ export default function Cities() {
     (_, index) =>
       cities.slice(index * cardsPerGroup, (index + 1) * cardsPerGroup)
   );
+  console.log("render cities");
   return (
     <div className="flex flex-col items-center">
       {/* Parte superior con título y foto de fondo */}
@@ -94,7 +94,6 @@ export default function Cities() {
           ))
         )}
       </div>
-      <Footer/>
     </div>
   );
 }

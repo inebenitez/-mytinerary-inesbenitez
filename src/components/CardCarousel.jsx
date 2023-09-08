@@ -1,6 +1,7 @@
 import { Link as Anchor } from "react-router-dom";
 
 export default function CardCarousel({ src, alt, text, pais,_id }) {
+    console.log(_id, 'id en cardcarousel')
     return (
         <div key={_id} className="relative md:w-1/2 relative flex flex-col pt-40 px-4 pb-4">
             <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover px-1 pb-2" />
@@ -16,7 +17,7 @@ export default function CardCarousel({ src, alt, text, pais,_id }) {
                 </div>
                 <button className="mt-auto font-bold bg-[#4f46e5] text-white rounded-[8px] text-xs self-start w-[90px] h-[30px]
                     md:rounded-[8px] text-sm self-start w-[130px] h-[42px]">
-                    <Anchor to={`/city/?id=${_id}`}>View More</Anchor>
+                    <Anchor to={_id}>View More</Anchor>
                 </button>
             </div>
         </div>

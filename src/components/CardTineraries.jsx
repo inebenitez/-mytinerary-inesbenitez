@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-export default function ItinerariesCard({
+export default function CardTineraries({
   src,
   alt,
   text,
-  id,
+  country,
   tags,
   price,
   duration,
+  user,
 }) {
   const [likes, setLikes] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
@@ -21,8 +22,8 @@ export default function ItinerariesCard({
   };
 
   return (
-    <div className="w-1/2 flex flex-col p-6 m-6 bg-gray-200 rounded-xl shadow-xl">
-      <h1 className="m-2 text-[20px] font-semibold text-center">{text}</h1>
+    <div className="w-1/2 flex flex-col p-6 m-6 bg-gray-200 rounded-xl shadow-xl bg-green-700">
+      <h1 className="m-2 text-[20px] font-semibold text-center bg-red-900">{text}</h1>
       <img src={src} alt={alt} className="h-fit" />
       <div className="flex flex-row justify-between my-4">
         <div className="flex flex-row flex-start">
@@ -61,19 +62,21 @@ export default function ItinerariesCard({
           )}
         </svg>
       </div>
+
       {showDetails && (
-        <div className="flex flex-col m-2 p-2">
-          <div className="lg:flex lg:flex-row lg:justify-between">
-            <div className="lg:w-1/4">
+        <div className="flex flex-col border border-sky-500">
+          <div className="lg:flex lg:flex-row lg:justify-between border border-sky-500">
+            <div className="lg:w-1/4 border border-sky-500">
               <h2 className="text-center text-sm font-bold text-indigo-500 mt-4 lg:text-lg">
-                User
+                Usser
               </h2>
+              <h1 className="text-center">{user}</h1>
             </div>
-            <div className="lg:w-1/4">
+            <div className="lg:w-1/4 border border-sky-500">
               <h2 className="text-center text-sm font-bold text-indigo-500 mt-4 lg:text-lg">
                 Hashtags
               </h2>
-              <h1 className="text-center">{tags}</h1>
+              <h1 className="text-center flex-col">{tags}</h1>
             </div>
             <div className="lg:w-1/4">
               <h2 className="text-center text-sm font-bold text-indigo-500 mt-4 lg:text-lg">
@@ -84,7 +87,7 @@ export default function ItinerariesCard({
             <div className="lg:w-1/4 flex flex-col items-center">
               {" "}
               <h2 className="text-center text-sm font-bold text-indigo-500 mt-4 lg:text-lg">
-                Titulo
+                Price
               </h2>
               <h1 className="text-center flex items-center">
                 {price}
@@ -111,6 +114,90 @@ export default function ItinerariesCard({
             </span>
           </div>
         </div>
+        // <section class="text-gray-700 body-font">
+        //   <div class="flex flex-wrap -m-4 text-center">
+        //   <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        //       <div class="border-2 border-gray-600 px-2 py-4 rounded-lg transform transition duration-500 hover:scale-110">
+        //         <svg
+        //           fill="none"
+        //           stroke="currentColor"
+        //           stroke-linecap="round"
+        //           stroke-linejoin="round"
+        //           stroke-width="2"
+        //           class="text-indigo-500 w-12 h-12 mb-3 inline-block"
+        //           viewBox="0 0 24 24"
+        //         >
+        //           <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+        //           <circle cx="9" cy="7" r="4"></circle>
+        //           <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
+        //         </svg>
+        //         <h2 class="title-font font-medium text-3xl text-gray-900">
+        //           1.3K
+        //         </h2>
+        //         <p class="leading-relaxed">Users</p>
+        //       </div>
+        //     </div>
+        //     <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        //       <div class="border-2 border-gray-600 px-2 py-4 rounded-lg transform transition duration-500 hover:scale-110">
+        //         <svg
+        //           fill="none"
+        //           stroke="currentColor"
+        //           stroke-linecap="round"
+        //           stroke-linejoin="round"
+        //           stroke-width="2"
+        //           class="text-indigo-500 w-12 h-12 mb-3 inline-block"
+        //           viewBox="0 0 24 24"
+        //         >
+        //           <path d="M8 17l4 4 4-4m-4-5v9"></path>
+        //           <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
+        //         </svg>
+        //         <h2 class="title-font font-medium text-3xl text-gray-900">
+        //           2.7K
+        //         </h2>
+        //         <p class="leading-relaxed">Downloads</p>
+        //       </div>
+        //     </div>
+        //     <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        //       <div class="border-2 border-gray-600 px-2 py-4 rounded-lg transform transition duration-500 hover:scale-110">
+        //         <svg
+        //           fill="none"
+        //           stroke="currentColor"
+        //           stroke-linecap="round"
+        //           stroke-linejoin="round"
+        //           stroke-width="2"
+        //           class="text-indigo-500 w-12 h-12 mb-3 inline-block"
+        //           viewBox="0 0 24 24"
+        //         >
+        //           <path d="M3 18v-6a9 9 0 0118 0v6"></path>
+        //           <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path>
+        //         </svg>
+        //         <h2 class="title-font font-medium text-3xl text-gray-900">
+        //           74
+        //         </h2>
+        //         <p class="leading-relaxed">Files</p>
+        //       </div>
+        //     </div>
+        //     <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+        //       <div class="border-2 border-gray-600 px-2 py-4 rounded-lg transform transition duration-500 hover:scale-110">
+        //         <svg
+        //           fill="none"
+        //           stroke="currentColor"
+        //           stroke-linecap="round"
+        //           stroke-linejoin="round"
+        //           stroke-width="2"
+        //           class="text-indigo-500 w-12 h-12 mb-3 inline-block"
+        //           viewBox="0 0 24 24"
+        //         >
+        //           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        //         </svg>
+        //         <h2 class="title-font font-medium text-3xl text-gray-900">
+        //           46
+        //         </h2>
+        //         <p class="leading-relaxed">Places</p>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </section>
       )}
     </div>
   );

@@ -1,12 +1,9 @@
 export default function CardCity({ src, alt, text }) {
-    return (
-    // <footer className="flex justify-around items-center  py-[24px] bg-purple-300">
-    //     MyTinerary
-    // </footer>
-    <footer className="text-center text-white w-full h-[8vh]">
-        <div className="p-4 text-center text-neutral-700 dark:bg-neutral-400 dark:text-neutral-200">
-        © 2023 Copyright
-        </div>
+  return (
+    <footer className="flex flex-col items-center bg-neutral-200 text-center text-white dark:bg-neutral-600 dark:text-neutral-200">
+      <div className="w-full bg-neutral-300 p-4 text-center text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200">
+        MindHub © 2023 Copyright
+      </div>
     </footer>
-    );
+  );
 }

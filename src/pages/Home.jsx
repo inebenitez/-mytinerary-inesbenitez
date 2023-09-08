@@ -1,6 +1,5 @@
 import { useState,useEffect } from "react";
 import Carousel from "../components/Carousel"
-import Footer from "../components/Footer"
 import { Link as Anchor } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
@@ -15,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(read_carousel());
   }, []);
-
+console.log("render home")
   return (
     <main className="min-h-[74vh]">
       <div className="font-sans flex flex-col px-4
@@ -42,7 +41,6 @@ export default function Home() {
           cities!"
         </p>
       </div>
-      <Footer />
     </main>
   
   );
