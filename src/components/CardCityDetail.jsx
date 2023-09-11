@@ -24,11 +24,10 @@ export default function CityDetailWithItineraries({ city }) {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-blue-500">
-      <div className="flex flex-col bg-yellow-600">
-        <button
-          onClick={toggleShow}
-          className="bg-indigo-500 px-4 py-2 my-8 rounded-lg text-slate-200 font-semibold hover:bg-indigo-700 hover:text-white"
+    <div className="flex flex-col items-center min-h-screen">
+      <div className="flex flex-col">
+        <button onClick={toggleShow}
+          className="bg-indigo-500 items-center px-4 py-2 my-8 rounded-lg text-slate-200 font-semibold hover:bg-indigo-700 hover:text-white"
         >
           {show ? "Hide itineraries" : "View itineraries"}
         </button>
@@ -46,6 +45,7 @@ export default function CityDetailWithItineraries({ city }) {
                 price={each.price}
                 tags={each.tags}
                 user={each.city_id.admin_id.name}
+                photo={each.city_id.admin_id.photo}
               />
             ))
           ) : (

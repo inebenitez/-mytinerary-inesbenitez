@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 console.log("render home")
   return (
-    <main className="min-h-[74vh]">
+    <main className="min-h-[86vh]">
       <div className="font-sans flex flex-col px-4
           md:flex-row justify-center items-center">
         <div className="flex flex-col m-2

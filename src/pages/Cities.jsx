@@ -45,17 +45,19 @@ export default function Cities() {
       cities.slice(index * cardsPerGroup, (index + 1) * cardsPerGroup)
   );
   console.log("render cities");
+
+  
   return (
     <div className="flex flex-col items-center">
       {/* Parte superior con título y foto de fondo */}
       <div
-        className="w-full h-[150px] bg-cover bg-center flex flex-col items-center relative"
+        className="w-full h-[210px] bg-cover bg-center flex flex-col items-center relative"
         style={{
           backgroundImage: `url('${cities[currentImageIndex]?.photo}')`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-        <h1 className="text-white drop-shadow-xl shadow-black text-3xl font-bold p-4">
+        <h1 className="text-white drop-shadow-xl shadow-black text-3xl font-bold p-8">
           Cities
         </h1>
         <p className="font-bold text-white drop-shadow-xl shadow-black text-lg md:text-xl">
