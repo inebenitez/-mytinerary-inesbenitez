@@ -1,7 +1,7 @@
 import { useRef,useEffect,useState } from "react";
 import axios from "axios";
 import apiUrl from "../apiUrl";
-// import Swal from "sweetalert2";             
+import Swal from "sweetalert2";             
 import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import user_actions from "../store/actions/users"
@@ -23,9 +23,12 @@ export default function SignUp() {
     "France", 
     "Brazil", 
     "China", 
-    "Egypt", 
+    "Egypt",
+    "Finland", 
     "Germany", 
-    "Norwegian", 
+    "Norwegian",
+    "Poland",
+    "Russia",
     "Spain", 
     "United States"]
 
@@ -34,34 +37,17 @@ export default function SignUp() {
       name: name.current.value,
       lastName: lastName.current.value,
       country: country.current.value,
-      photo: photo.current.value ? photo.current.value : "http://www.mascotea.net/frontend/www/images/gallery/353/369-large-7247958c5a2bd040fd55a926726c4e92.jpg",
+      photo: photo.current.value 
+      ? photo.current.value : 
+      "http://www.mascotea.net/frontend/www/images/gallery/353/369-large-7247958c5a2bd040fd55a926726c4e92.jpg",
       mail: mail.current.value,
       password: password.current.value
     }
-    let response = dispatch(register({ data }))
-      .then(res => {
-        console.log(res)
-        if (res.payload.success === true) {
-          Swal.fire({
-            icon: 'success',
-            title: 'User created!',
-          })
-          navigate('/auth/signin')
-        } else if (res.payload.messages.length > 0) {
-          let html = res.payload.messages.map(each => `<p>${each}</p>`).join('')
-          Swal.fire({
-            title: 'Something went wrong!',
-            icon: 'error',
-            html
-          })
-        }
-      })
-      .catch(err => console.log(err))
-  }
-  let store = useSelector(store => store.users)
-  console.log(store);
+    dispatch(signin({ data }))
+}
 
-
+let store = useSelector(store => store.users)
+console.log(store);
 
   return (
     <div
