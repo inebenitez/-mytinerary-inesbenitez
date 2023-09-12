@@ -46,6 +46,7 @@ export default function CityDetailWithItineraries({ city }) {
                 tags={each.tags}
                 user={each.city_id.admin_id.name}
                 photo={each.city_id.admin_id.photo}
+                each={each}
               />
             ))
           ) : (
