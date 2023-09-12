@@ -6,16 +6,15 @@ const read_activities_itinerary = createAsyncThunk(
   "read_activities", //nombre de la accion
     async (obj) => {
     try {
-        let data = await axios(
-        apiUrl + "activities?itineraries=" + obj.itineraries
-);
-
-    return {
+        let data = await axios(apiUrl + 'activities?itinerary_id=' + obj.itinerary_id);
+            console.log(data)
+            return {
         activitiesItinerary: data.data.response,
     };
     } catch (error) {
         return {
-        activitiesItinerary: [],};
+        activitiesItinerary: [],
+    };
     }
 }
 );

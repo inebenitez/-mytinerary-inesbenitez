@@ -1,32 +1,24 @@
 import { createReducer } from "@reduxjs/toolkit";
 import user_actions from "../actions/users";
-const { read_6_users,signin,signin_token,signout,update_user } = user_actions
+const { signin,signin_token,signout,register } = user_actions
 
 const initial_state = {
     users: [],
     user: {},
     token: '',
-    messages: []
+    messages: [],
+    success: false
 }
 
 const user_reducer = createReducer(
     initial_state,
-    build=> build.addCase(
-        read_6_users.fulfilled,
-        (state,action)=> {
-            let new_state = {
-                ...state,
-                users: action.payload.users
-            }
-            return new_state
-        }
-    ).addCase(
+    builder=> builder.addCase(
         signin.fulfilled,
-        (state,action)=> {
+        (state,action)=>{
             let new_state = {
                 ...state,
-                user: action.payload.user,
-                token: action.payload.token,
+                user:action.payload.user,
+                token:action.payload.token,
                 messages: action.payload.messages
             }
             return new_state
@@ -41,26 +33,27 @@ const user_reducer = createReducer(
             }
             return new_state
         }
-    ).addCase(
-        signout.fulfilled,
-        (state,action)=> {
-            let new_state = {
-                ...state,
-                user: action.payload.user,
-                token: action.payload.token
+        ).addCase(
+            signout.fulfilled,
+            (state,action)=>{
+                let new_state = {
+                    ...state,
+                    user:action.payload.user,
+                    token:action.payload.token
+                }
+                return new_state
             }
-            return new_state
-        }
-    ).addCase(
-        update_user.fulfilled,
-        (state,action)=> {
-            let new_state = {
-                ...state,
-                user: action.payload.user
+        ).addCase(
+            register.fulfilled,
+            (state,action)=>{
+                let new_state = {
+                    ...state,
+                    success:action.payload.success,
+                    messages: action.payload.messages
+                }
+                return new_state
             }
-            return new_state
-        }
+        )
     )
-)
 
 export default user_reducer
