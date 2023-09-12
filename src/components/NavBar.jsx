@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link as Anchor } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import user_actions from "../store/actions/users";
-const { signout } = user_actions
+const { signout } = user_actions;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -15,8 +15,8 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  // let data = useSelector(store => store.data.data.response.user?.name)
-  // let dispatch = useDispatch()
+  let name = useSelector((store) => store.users.user?.name);
+  let dispatch = useDispatch();
 
   return (
     <div className="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
@@ -27,9 +27,9 @@ export default function Navbar() {
               My Tinerary
             </p>
           </Anchor>
-          {/* <span>
-              <p>{name}</p>
-          </span> */}
+          <span className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <p>Hola {name}!</p>
+          </span>
           <button
             className="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
             onClick={toggleDropdown}
@@ -65,30 +65,54 @@ export default function Navbar() {
           >
             Cities
           </Anchor>
-          <Anchor to="/auth/signin"
-            href="#"
-            className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 inline mr-2"
+
+          {name ? (
+            <span onClick={() => dispatch(signout())}>
+              <button className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 inline mr-2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+                Sign Out
+              </button>
+            </span>
+          ) : (
+            <Anchor
+              to="/auth/signin"
+              href="#"
+              className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-              />
-            </svg>
-            Login
-          </Anchor>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 inline mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                />
+              </svg>
+              Log In
+            </Anchor>
+          )}
+
           <div className="relative" onClick={closeDropdown}></div>
         </nav>
       </div>
     </div>
   );
 }
-

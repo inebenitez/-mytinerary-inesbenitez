@@ -17,8 +17,8 @@ export default function SignIn() {
     dispatch(signin({ data }));
   }
 
-  let user = useSelector(store=>store)
-  console.log(user)
+  let name = useSelector(store=>store); //.data.data.response.user?.name
+  console.log(name);
 
   return (
     <div

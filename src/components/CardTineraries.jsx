@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CardActivity from "./CardActivity";
+import CardActivity from "../components/CardActivity";
 
 export default function CardTineraries({
   src,
@@ -9,7 +9,7 @@ export default function CardTineraries({
   price,
   duration,
   user,
-  photo,
+  each,
 }) {
   const [likes, setLikes] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
@@ -64,7 +64,7 @@ export default function CardTineraries({
           <div className="lg:w-1/4 flex flex-col items-center justify-center">
             <div className="relative w-16 h-16 rounded-full overflow-hidden">
               <img
-                src={photo}
+                src={src}
                 alt={alt}
                 className="w-full h-full object-cover"
               />
@@ -181,7 +181,9 @@ export default function CardTineraries({
         </div>
         {/* activities */}
         {showDetails && (
-        <CardActivity/>
+          <div className=''>
+            <CardActivity  itinerary_id={each._id} />
+          </div>
         )}
       </div>
     </div>
