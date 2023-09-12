@@ -1,6 +1,7 @@
 import { useRef,useEffect,useState } from "react";
 import axios from "axios";
 import apiUrl from "../apiUrl";
+// import Swal from "sweetalert2";             
 import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import user_actions from "../store/actions/users"
@@ -28,37 +29,6 @@ export default function SignUp() {
     "Spain", 
     "United States"]
 
-
-  // const [reload,setReload] = useState(false)
-  // const dispatch = useDispatch()
-  // useEffect(
-  //   ()=>{dispatch(register())},
-  //   [reload]
-  // )
-
-  // async function handleSignUp() {
-  //   try {
-  //     let data = {
-  //       name: name.current.value,
-  //       lastName: lastName.current.value,
-  //       country: country.current.value,
-  //       mail: mail.current.value,
-  //       password: password.current.value,
-  //     };
-  //       if (photo.current.value) {
-  //         data.photo = photo.current.value
-  //       }
-  //     await axios.post(
-  //       apiUrl + "users/signup", 
-  //       data 
-  //     );
-  //     setReload(!reload)
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   async function handleSignUp() {
     let data = {
       name: name.current.value,
@@ -68,7 +38,7 @@ export default function SignUp() {
       mail: mail.current.value,
       password: password.current.value
     }
-    let responseDispatch = dispatch(register({ data }))
+    let response = dispatch(register({ data }))
       .then(res => {
         console.log(res)
         if (res.payload.success === true) {

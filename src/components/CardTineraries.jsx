@@ -181,7 +181,7 @@ export default function CardTineraries({
         </div>
         {/* activities */}
         {showDetails && (
-          <div className=''>
+          <div className="flex flex-col">
             <CardActivity  itinerary_id={each._id} />
           </div>
         )}
