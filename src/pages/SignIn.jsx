@@ -1,10 +1,12 @@
 import { useRef } from "react";
-import { Link as Anchor } from "react-router-dom";
+import { Link as Anchor, useNavigate} from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import user_action from "../store/actions/users";
 const { signin } = user_action;
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const mail_signin = useRef("");
   const password_signin = useRef("");
   const dispatch = useDispatch();
@@ -13,11 +15,19 @@ export default function SignIn() {
     let data = {
       mail: mail_signin.current.value,
       password: password_signin.current.value,
-    };
-    dispatch(signin({ data }));
+  }    
+  let responseDispatch = dispatch(signin({ data }))
+  .then((res) => {
+    if (res.payload.token) {
+      Swal.fire({
+        icon: "success",
+        title: "Logged in!",
+      });
+      navigate("/");
+    }}
+  )
   }
-
-  let name = useSelector(store=>store); //.data.data.response.user?.name
+  let name = useSelector(store=>store); 
   console.log(name);
 
   return (

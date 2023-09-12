@@ -14,7 +14,6 @@ export default function Home() {
   useEffect(() => {
     dispatch(read_carousel());
   }, []);
-console.log("render home")
   return (
     <main className="min-h-[86vh]">
       <div className="font-sans flex flex-col px-4
