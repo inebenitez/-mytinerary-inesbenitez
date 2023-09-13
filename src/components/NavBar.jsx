@@ -15,7 +15,6 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  // let user = useSelector((store) => store.users?.user);
   let name = useSelector((store) => store.users.user?.name);
   let photo = useSelector((store) => store.users.user?.photo);
   let mail = useSelector((store) => store.users.user?.mail);
