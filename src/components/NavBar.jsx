@@ -16,6 +16,8 @@ export default function Navbar() {
   };
 
   let name = useSelector((store) => store.users.user?.name);
+  let photo = useSelector((store) => store.users.user?.photo);
+  let mail = useSelector((store) => store.users.user?.mail);
   let dispatch = useDispatch();
 
   return (
@@ -27,9 +29,13 @@ export default function Navbar() {
               My Tinerary
             </p>
           </Anchor>
-          <span className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-            <p>Hola {name}!</p>
-          </span>
+          
+          { mail ? (<span className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <img src={photo} style={{ width: '30px',height:"30px" }}/>
+            <p>Hello  {name}!</p>
+          </span>) : ("")
+          }
+
           <button
             className="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
             onClick={toggleDropdown}
@@ -67,7 +73,7 @@ export default function Navbar() {
           </Anchor>
 
           {name ? (
-            <span onClick={() => dispatch(signout())}>
+                        <span onClick={() => dispatch(signout())}>
               <button className="px-4 py-2 mt-2 text-sm text-white font-semibold bg-indigo-500 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 flex items-center hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +89,7 @@ export default function Navbar() {
                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                   />
                 </svg>
-                Sign Out
+                Log Out
               </button>
             </span>
           ) : (

@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 const { read_activities_itinerary } = activity_actions;
 
 export default function Activity({ itinerary_id }) {
-  const dispatch = useDispatch();
-  const activities = useSelector(
-    (store) => store.activities.activitiesItinerary
-  )
-  const [activity, setActivity] = useState([]);
+  const dispatch = useDispatch()
+  // const activities = useSelector(
+  //   (store) => store.activities.activitiesItinerary
+  // )
+  let [activities, setActivity] = useState([]);
+  
   useEffect(() => {
-    dispatch(read_activities_itinerary({ itinerary_id: itinerary_id }));
-  }, [itinerary_id]);
+    dispatch(read_activities_itinerary({ itinerary_id: itinerary_id }))
+    .then(res=>setActivity(res.payload.activitiesItinerary)) 
+    .catch(err=>console.log(err))
+  }, []);
 
 return (
   <div className="flex flex-row text-center text-sm mt-4 lg:text-lg">

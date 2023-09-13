@@ -13,10 +13,11 @@ export default function SignUp() {
   const dispatch = useDispatch()
   const name = useRef();
   const lastName = useRef();
-  const country = useRef();
   const photo = useRef();
   const mail = useRef();
   const password = useRef();
+  const country = useRef();
+
 
   let countries = [
     "Argentina", 
@@ -30,21 +31,40 @@ export default function SignUp() {
     "Poland",
     "Russia",
     "Spain", 
-    "United States"]
+    "United States",
+    "United Kingdom"]
 
   async function handleSignUp() {
     let data = {
       name: name.current.value,
       lastName: lastName.current.value,
-      country: country.current.value,
       photo: photo.current.value 
       ? photo.current.value : 
       "http://www.mascotea.net/frontend/www/images/gallery/353/369-large-7247958c5a2bd040fd55a926726c4e92.jpg",
       mail: mail.current.value,
-      password: password.current.value
+      password: password.current.value,
+      country: country.current.value,
     }
-    dispatch(signin({ data }))
-}
+    let responseDispatch = dispatch(register({ data }))
+      .then(res => {
+        console.log(res)
+        if (res.payload.sucess.name) {
+          Swal.fire({
+            icon: 'success',
+            title: 'User created successfully!',
+          })
+          navigate('/auth/signin')
+        } else if (res.payload.messages.length > 0) {
+          let html = res.payload.messages.map(each => `<p>${each}</p>`).join('')
+          Swal.fire({
+            title: 'Something went wrong!',
+            icon: 'error',
+            html
+          })
+        }
+      })
+      .catch(err => console.log(err))
+  }
 
 let store = useSelector(store => store.users)
 console.log(store);
@@ -71,47 +91,66 @@ console.log(store);
           <div className="my-6 border-b text-center">
             <div className="text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
               Already have an account?
-              <Anchor to="/auth/signin" className="ml-2 text-blue-500">
-                Sign in
-              </Anchor>
-            </div>
+              <Anchor to="/auth/signin" className="ml-2 text-blue-500">Sign in</Anchor>
+          </div>
           </div>
 
-          <div className="w-full flex-1 mt-4">
+          <form className="w-full flex-1 mt-4">
             <div className="flex flex-col gap-2">
               <input
                 ref={name}
                 type="text"
+                name="name" 
+                id="name"
+                htmlFor="name"
                 placeholder="First Name"
                 className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
               />
               <input
                 ref={lastName}
                 type="text"
+                name="lastName" 
+                id="lastName"
+                htmlFor="lastName"                
                 placeholder="Last Name"
                 className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
               />
               <input
                 ref={photo}
                 type="text"
+                name="photo" 
+                id="photo"
+                htmlFor="photo"  
                 placeholder="Photo URL (optional)"
                 className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
               />
               <input
                 ref={mail}
                 type="email"
+                name="mail" 
+                id="mail"
+                htmlFor="mail"  
                 placeholder="Email"
                 className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
               />
               <input
                 ref={password}
                 type="password"
+                name="password" 
+                id="password"
+                htmlFor="password"
                 placeholder="Password"
                 className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
               />
 
-              <div className="justify-between"><label htmlFor="country" className="font-medium">Country:</label>
-              <select ref={country} name="country" id="country" className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
+              <div className="justify-between"><label 
+              htmlFor="country" 
+              className="font-medium">Country:</label>
+              <select 
+              ref={country} 
+              name="country" 
+              id="country" 
+              className="max-w-sm px-6 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white">
                 <option value=""></option>
                 {countries.map((country) => (<option key={country} value={country}>{country}</option>))}
               </select>
@@ -136,7 +175,7 @@ console.log(store);
               />
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

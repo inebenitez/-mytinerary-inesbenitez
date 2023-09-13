@@ -73,10 +73,10 @@ const register = createAsyncThunk(
     'register',
     async (obj)=>{
         try{
-            let data = await axios.post(apiUrl+'auth/register',obj.data)
+            let data = await axios.post(apiUrl + 'auth/register', obj.data)
             console.log("REGISTER:", data);
             return{
-                success:data.data.success
+                sucess: data.data.response
             }
         }catch(error){
             console.log(error);
