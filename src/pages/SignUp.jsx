@@ -48,7 +48,7 @@ export default function SignUp() {
     let responseDispatch = dispatch(register({ data }))
       .then(res => {
         console.log(res)
-        if (res.payload.success === true) {
+        if (res.payload.sucess.name) {
           Swal.fire({
             icon: 'success',
             title: 'User created successfully!',
